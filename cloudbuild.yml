@@ -3,12 +3,12 @@ steps:
 # Install
 - name: 'gcr.io/cloud-builders/yarn'
   args: ['install']
-# # Lint
-# - name: 'gcr.io/cloud-builders/yarn'
-#   args: ['run', 'lint']
-# # Test
-# - name: 'gcr.io/cloud-builders/yarn'
-#   args: ['run', 'unittest']
+# Lint
+- name: 'gcr.io/cloud-builders/yarn'
+  args: ['run', 'lint']
+# Test
+- name: 'gcr.io/cloud-builders/yarn'
+  args: ['run', 'unittest']
 # Build
 - name: 'gcr.io/cloud-builders/yarn'
   args: ['run', 'build']
@@ -17,9 +17,9 @@ steps:
   - 'NODE_PATH=./src'
 # Deploy
 - name: gcr.io/cloud-builders/gsutil
-  #args: ["-m", "rsync", "-d", "-r", "build", "gs://${_FE_STAGING_BUCKET_NAME}"]
-  args: ["-m", "rsync", "-d", "-r", "build", "gs://staging.sample-1613270266238.appspot.com]
+  args: ["-m", "rsync", "-d", "-r", "build", "gs://${_FE_STAGING_BUCKET_NAME}"]
 # Grant public permission
 # TODO: it should be remove, by setting default permissions for the bucket.
 - name: gcr.io/cloud-builders/gsutil
-  args: ["-m", "acl", "ch", "-u", "AllUsers:R", "gs://staging.sample-1613270266238.appspot.com/**"]
+  args: ["-m", "acl", "ch", "-u", "AllUsers:R", "gs://${_FE_STAGING_BUCKET_NAME}/**"]
+  
