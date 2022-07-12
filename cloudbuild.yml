@@ -1,16 +1,10 @@
 # This is script for https://cloud.google.com/cloud-build/
 steps:
 # Install
-- name: 'gcr.io/cloud-builders/yarn'
+- name: 'gcr.io/cloud-builders/npm'
   args: ['install']
-# Lint
-- name: 'gcr.io/cloud-builders/yarn'
-  args: ['run', 'lint']
-# Test
-- name: 'gcr.io/cloud-builders/yarn'
-  args: ['run', 'unittest']
 # Build
-- name: 'gcr.io/cloud-builders/yarn'
+- name: 'gcr.io/cloud-builders/npm'
   args: ['run', 'build']
   env:
   - 'REACT_APP_BACKEND_URL=${_REACT_APP_BACKEND_URL}'
@@ -22,4 +16,3 @@ steps:
 # TODO: it should be remove, by setting default permissions for the bucket.
 - name: gcr.io/cloud-builders/gsutil
   args: ["-m", "acl", "ch", "-u", "AllUsers:R", "gs://${_FE_STAGING_BUCKET_NAME}/**"]
-  
