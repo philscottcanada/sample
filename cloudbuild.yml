@@ -13,7 +13,7 @@ steps:
 - name: 'gcr.io/cloud-builders/yarn'
   args: ['run', 'build']
   env:
-  - 'REACT_APP_BACKEND_URL=https://sample-1613270266238.uc.r.appspot.com/'
+  - 'REACT_APP_BACKEND_URL=${_REACT_APP_BACKEND_URL}'
   - 'NODE_PATH=./src'
 # Deploy
 - name: gcr.io/cloud-builders/gsutil
