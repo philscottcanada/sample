@@ -17,8 +17,9 @@ steps:
   - 'NODE_PATH=./src'
 # Deploy
 - name: gcr.io/cloud-builders/gsutil
-  args: ["-m", "rsync", "-d", "-r", "build", "gs://${_FE_STAGING_BUCKET_NAME}"]
+  #args: ["-m", "rsync", "-d", "-r", "build", "gs://${_FE_STAGING_BUCKET_NAME}"]
+  args: ["-m", "rsync", "-d", "-r", "build", "gs://staging.sample-1613270266238.appspot.com]
 # Grant public permission
 # TODO: it should be remove, by setting default permissions for the bucket.
 - name: gcr.io/cloud-builders/gsutil
-  args: ["-m", "acl", "ch", "-u", "AllUsers:R", "gs://${_FE_STAGING_BUCKET_NAME}/**"]
+  args: ["-m", "acl", "ch", "-u", "AllUsers:R", "gs://staging.sample-1613270266238.appspot.com/**"]
