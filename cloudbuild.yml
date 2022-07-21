@@ -19,9 +19,9 @@
 
 # This is script for https://cloud.google.com/cloud-build/
 steps:
-# Clear Files
-- name: 'gcr.io/cloud-builders/gsutil'
-  args: ["rm", "-r", "*"]
+# # Clear Files
+# - name: 'gcr.io/cloud-builders/gsutil'
+#   args: ["rm", "-r", "*"]
 
 # Copy Git
 - name: 'gcr.io/cloud-builders/git'
