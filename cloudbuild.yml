@@ -18,11 +18,22 @@
 #   args: ["-m", "acl", "ch", "-u", "AllUsers:R", "gs://${_FE_STAGING_BUCKET_NAME}/**"]
 
 # This is script for https://cloud.google.com/cloud-build/
-steps:
-# # Clear Files
-# - name: 'gcr.io/cloud-builders/gsutil'
-#   args: ["rm", "-r", "*"]
+# Step 0: FRONTEND npm install
+- name: "gcr.io/cloud-builders/npm"
+  dir: 'frontend'
+  args: ['install']
+  timeout: "5m"
 
-# Copy Git
-- name: 'gcr.io/cloud-builders/git'
-  args: ['clone', 'https://github.com/philscottcanada/sample.git']
+# Step 1: FRONTEND optimized build
+- name: "gcr.io/cloud-builders/npm"
+  dir: 'frontend'
+  args: ["run", "build"]
+  timeout: "5m"
+
+# Step 2: FRONTEND Deploy cloud app frontend
+- name: "gcr.io/cloud-builders/gcloud"
+  args: ["app", "deploy", "-v", "0-1-2", "app.yaml"]
+  dir: 'frontend'
+  timeout: "20m"
+
+timeout: 60m
