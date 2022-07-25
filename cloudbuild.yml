@@ -18,6 +18,7 @@
 #   args: ["-m", "acl", "ch", "-u", "AllUsers:R", "gs://${_FE_STAGING_BUCKET_NAME}/**"]
 
 # This is script for https://cloud.google.com/cloud-build/
+steps:
 # Step 0: FRONTEND npm install
 - name: "gcr.io/cloud-builders/npm"
   dir: 'frontend'
